@@ -8,6 +8,7 @@ from . import serializers
 class ProjectAPIView(viewsets.ModelViewSet):
     queryset = models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
+    parser_classes = (parsers.MultiPartParser, parsers.JSONParser)
     lookup_field = 'code'
 
 

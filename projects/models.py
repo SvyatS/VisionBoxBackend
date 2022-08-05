@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from uuid import uuid4
 
-from .utils import upload_path_render, upload_path_panorama
+from .utils import upload_path_render, upload_path_panorama, upload_path_imitation_model
 
 
 class Project(models.Model):
@@ -20,6 +20,7 @@ class Project(models.Model):
     status = models.CharField("Project's status", max_length=64, choices=_STATUSES, default=_STATUSES[0][0])
     ready = models.IntegerField("Project's readiness", default=0)
     code = models.UUIDField("Project's code", primary_key=True, default=uuid4, editable=False)
+    imitation_model = models.FileField(upload_to=upload_path_imitation_model, null=True)
 
 
 class Room(models.Model):

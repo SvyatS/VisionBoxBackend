@@ -20,7 +20,8 @@ class RoomSerializer(serializers.ModelSerializer):
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    rooms = RoomSerializer(many=True, required=True)
+    rooms = RoomSerializer(many=True, required=False)
+    imitation_model = serializers.FileField(required=False)
 
     class Meta:
         model = models.Project

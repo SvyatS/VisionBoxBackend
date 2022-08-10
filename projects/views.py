@@ -1,4 +1,3 @@
-from requests import Response
 from rest_framework import viewsets, parsers
 
 from . import models

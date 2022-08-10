@@ -20,7 +20,7 @@ class Project(models.Model):
     status = models.CharField("Project's status", max_length=64, choices=_STATUSES, default=_STATUSES[0][0])
     ready = models.IntegerField("Project's readiness", default=0)
     code = models.UUIDField("Project's code", primary_key=True, default=uuid4, editable=False)
-    imitation_model = models.FileField(upload_to=upload_path_imitation_model, null=True)
+    imitation_model = models.FileField(upload_to=upload_path_imitation_model, null=True, blank=True)
 
 
 class Room(models.Model):

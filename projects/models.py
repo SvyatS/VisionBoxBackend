@@ -31,6 +31,14 @@ class Room(models.Model):
     status = models.CharField("Room's status", max_length=32, choices=_STATUSES, default=_STATUSES[1][0])
     project = models.ForeignKey(Project, related_name='rooms', on_delete=models.CASCADE)
 
+    def save(self, *args, **kwargs):
+        super(Room, self).save(*args, **kwargs)
+        if getattr(self, 'status_changed', True):
+            project = Project.objects.get(code=self.project_id)
+            agreed_rooms = project.rooms.filter(status=self._STATUSES[0][0]).count()
+            project.ready = agreed_rooms * 100 / project.rooms.count()
+            project.save()
+
 
 class RoomRender(models.Model):
     ''' Render for room '''

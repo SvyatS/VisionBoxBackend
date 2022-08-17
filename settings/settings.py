@@ -55,7 +55,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'phonenumber_field',
     'projects',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -95,10 +97,10 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'VisionBox',
+        'NAME': 'visionbox',
         'USER': 'postgres',
         'PASSWORD': '12',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': 5432,
     }
 }
@@ -133,6 +135,9 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+
+AUTH_USER_MODEL = 'users.CustomUser'
 
 
 # Static files (CSS, JavaScript, Images)

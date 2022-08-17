@@ -5,10 +5,21 @@ from . import serializers
 
 
 class ProjectAPIView(viewsets.ModelViewSet):
-    queryset = models.Project.objects.all()
+    # queryset = get_queryset()
     serializer_class = serializers.ProjectSerializer
     parser_classes = (parsers.MultiPartParser, parsers.JSONParser)
     lookup_field = 'code'
+
+    def get_queryset(self):
+        user = self.request.user
+        return models.Project.objects.filter(editor=user)
+
+
+class RoomAPIView(viewsets.ModelViewSet):
+    serializer_class = serializers.RoomSerializer
+    queryset = models.Room.objects.all()
+    parser_classes = (parsers.MultiPartParser, parsers.JSONParser)
+    lookup_field = 'pk'
 
 
 class RoomRenderViewset(viewsets.ModelViewSet):

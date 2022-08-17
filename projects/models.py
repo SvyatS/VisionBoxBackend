@@ -1,8 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
 from datetime import datetime
 from uuid import uuid4
 
+from users.models import CustomUser
 from .utils import upload_path_render, upload_path_panorama, upload_path_imitation_model
 
 
@@ -16,7 +16,7 @@ class Project(models.Model):
     customer_email = models.CharField("Customer's email", max_length=128)
     start_date = models.DateTimeField("Start date", null=True, default=datetime.now)
     end_date = models.DateTimeField("End date", null=True)
-    editor = models.ForeignKey(User, on_delete=models.CASCADE)
+    editor = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     status = models.CharField("Project's status", max_length=64, choices=_STATUSES, default=_STATUSES[0][0])
     ready = models.IntegerField("Project's readiness", default=0)
     code = models.UUIDField("Project's code", primary_key=True, default=uuid4, editable=False)

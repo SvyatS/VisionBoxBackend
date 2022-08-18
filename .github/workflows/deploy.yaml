@@ -26,11 +26,11 @@ jobs:
         run: ssh-keyscan -H 193.107.236.227 >> ~/.ssh/known_hosts && sudo apt install sshpass
       - name: Delivery to server
         run: sshpass -p YhyFDUmhS7V67Gm rsync -avz -e 'ssh -o StrictHostKeyChecking=no -p 22' ./ root@193.107.236.227:/var/www/web/sites/vision-box-staging
-      - name: executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@master
-        with:
-          host: 193.107.236.227
-          username: root
-          password: YhyFDUmhS7V67Gm
-          port: 22
-          script: pip install -r requirements.txt && python3 manage.py migrate
+#      - name: executing remote ssh commands using ssh key
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: 193.107.236.227
+#          username: root
+#          password: YhyFDUmhS7V67Gm
+#          port: 22
+#          script: pip install -r requirements.txt && python3 manage.py migrate

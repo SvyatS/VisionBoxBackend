@@ -1,0 +1,8 @@
+django~=3.2.12
+djangorestframework~=3.13.1
+drf_yasg
+django-phonenumber-field[phonenumberslite]
+djangorestframework-simplejwt
+djangorestframework-simplejwt[crypto]
+django-environ
+gunicorn

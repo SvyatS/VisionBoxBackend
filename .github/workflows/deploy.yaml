@@ -1,0 +1,42 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup python environment # setting python environment to 3.x
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Check Python version # checking the python version to see if 3.x is installed.
+        run: python --version
+      - name: Install requirements # install application requirements
+        run: pip install -r requirements.txt
+      - name: Run Migrations # run migrations to create table in side car db container
+        run: python manage.py migrate
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.VISIONBOX_SSH_KEY }}
+          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H 193.107.236.227 >> ~/.ssh/known_hosts && sudo apt install sshpass
+      - name: Delivery to server
+        run: sshpass -p YhyFDUmhS7V67Gm rsync -avz -e 'ssh -o StrictHostKeyChecking=no -p 22' ./VisionBoxBackend root@193.107.236.227:/var/www/web/sites/vision-box-staging
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: 193.107.236.227
+          username: root
+          password: YhyFDUmhS7V67Gm
+          port: 22
+          script: sudo systemctl stop jobs && sudo systemctl start jobs

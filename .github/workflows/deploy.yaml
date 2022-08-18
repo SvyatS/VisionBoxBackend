@@ -25,7 +25,7 @@ jobs:
       - name: Adding Known Hosts
         run: ssh-keyscan -H 193.107.236.227 >> ~/.ssh/known_hosts && sudo apt install sshpass
       - name: Delivery to server
-        run: sshpass -p YhyFDUmhS7V67Gm rsync -avz -e 'ssh -o StrictHostKeyChecking=no -p 22' ./VisionBoxBackend root@193.107.236.227:/var/www/web/sites/vision-box-staging
+        run: sshpass -p YhyFDUmhS7V67Gm rsync -avz -e 'ssh -o StrictHostKeyChecking=no -p 22' ./ root@193.107.236.227:/var/www/web/sites/vision-box-staging
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:

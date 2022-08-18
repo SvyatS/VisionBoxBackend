@@ -6,3 +6,4 @@ djangorestframework-simplejwt
 djangorestframework-simplejwt[crypto]
 django-environ
 gunicorn
+pillow

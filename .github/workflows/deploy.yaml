@@ -33,4 +33,4 @@ jobs:
           username: root
           password: YhyFDUmhS7V67Gm
           port: 22
-          script: sudo systemctl stop jobs && sudo systemctl start jobs
+          script: pip install -r requirements.txt && python3 manage.py migrate

@@ -4,6 +4,7 @@ from uuid import uuid4
 
 from users.models import CustomUser
 from .utils import upload_path_render, upload_path_panorama, upload_path_imitation_model
+from users.utils import id_generator
 
 
 class Project(models.Model):
@@ -19,7 +20,7 @@ class Project(models.Model):
     editor = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     status = models.CharField("Project's status", max_length=64, choices=_STATUSES, default=_STATUSES[0][0])
     ready = models.IntegerField("Project's readiness", default=0)
-    code = models.UUIDField("Project's code", primary_key=True, default=uuid4, editable=False)
+    code = models.CharField("Project's code", max_length=8, primary_key=True, default=id_generator, editable=False)
     imitation_model = models.FileField(upload_to=upload_path_imitation_model, null=True, blank=True)
 
 

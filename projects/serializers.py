@@ -42,6 +42,14 @@ class RoomPanoramaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class getProjectMobileSerializer(serializers.ModelSerializer):
+    rooms = RoomSerializer(many=True, required=False)
+    imitation_model = serializers.FileField(required=False)
+
+    class Meta:
+        model = models.Project
+        exclude = ('customer_name', 'customer_phone', 'customer_email', 'start_date', 'end_date')
+
 
 
 

@@ -10,6 +10,7 @@ CRUD_METHODS_FULL = {'get': 'retrieve', 'patch': 'partial_update', 'delete': 'de
 urlpatterns = [
     path('projects/', views.ProjectAPIView.as_view(CRUD_METHODS_LIST), name='project-list'),
     path('projects/<slug:code>', views.ProjectAPIView.as_view(CRUD_METHODS_ITEM), name='project-obj'),
+    path('project-login/<slug:designer_id>/<slug:project_code>', views.GetProjectMobile.as_view(), name='project-obj-mobile'),
     path('rooms/', views.RoomAPIView.as_view(CRUD_METHODS_CREATE), name='rooms-list'),
     path('rooms/<int:pk>', views.RoomAPIView.as_view(CRUD_METHODS_ITEM), name='room-obj'),
     path('rooms/render/<int:id>', views.RoomRenderViewset.as_view(CRUD_METHODS_FULL), name='room-render-upload'),

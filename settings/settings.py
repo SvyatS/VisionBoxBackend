@@ -1,5 +1,6 @@
 from pathlib import Path
 from datetime import timedelta
+from secrets import token_hex
 import environ
 
 
@@ -8,7 +9,7 @@ environ.Env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = env('SECRET_KEY', default="unsafe-secret-key"),
+SECRET_KEY = env('SECRET_KEY', default='django_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG', default=True)
@@ -25,8 +26,9 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=20),
-    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=20),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=30),
+    'SIGNING_KEY': token_hex(64)
 }
 
 
